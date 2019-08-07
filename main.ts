@@ -90,7 +90,7 @@ enum PinMode {
  */
 //% color=170 weight=49 block="Twin" icon="\uf076"
 namespace twin {
-
+    let buzzerOccupied = false;
     //Movement
     /**
     * Select DC Motor Pin and velocity
@@ -128,7 +128,7 @@ namespace twin {
         let readValue = pinRead(PinMode.Analog, inPin);
         return readValue
     }
-    
+
     /**
     * Read the button at given pin
     */
@@ -196,12 +196,13 @@ namespace twin {
 
     /**
      * Play the selected melody on the buzzer connected at the selected pin
+     *  Next block will not wait this melody to complete!
      */
     //% blockId="twin_melody_sound" block="Play %melody on the buzzer"
     //% weight=97
     //% subcategory=Sound
     export function buzzerMelody(melody: BuzzerMelodies) {
-        //TODO simdilik sadece starwars
+        //TODO Starwars only for now
         switch (melody) {
             case BuzzerMelodies.Starwars:
                 starWars();
@@ -228,6 +229,7 @@ namespace twin {
     export function buzzerCustomNote(note: number, ms: number) {
         pins.analogPitch(note, ms);
     }
+
 
     function pinWrite(pinmode: PinMode, outPin: OutPins, value: number) {
         if (pinmode == PinMode.Analog) {
@@ -280,81 +282,88 @@ namespace twin {
         }
     }
     function aToD(value: number): number { if (value >= 495) return 1; else return 0; }
+    //Todo BuzzerOccupied is a temporary solution
     function starWars() {
-        pins.analogPitch(440, 500)
-        pins.analogPitch(440, 500)
-        pins.analogPitch(440, 500)
-        pins.analogPitch(349, 350)
-        pins.analogPitch(523, 150)
-        pins.analogPitch(440, 500)
-        pins.analogPitch(349, 350)
-        pins.analogPitch(523, 150)
-        pins.analogPitch(440, 650)
-        basic.pause(500)
-        pins.analogPitch(659, 500)
-        pins.analogPitch(659, 500)
-        pins.analogPitch(659, 500)
-        pins.analogPitch(698, 350)
-        pins.analogPitch(523, 150)
-        pins.analogPitch(415, 500)
-        pins.analogPitch(349, 350)
-        pins.analogPitch(523, 150)
-        pins.analogPitch(440, 650)
-        basic.pause(500)
-        pins.analogPitch(880, 500)
-        pins.analogPitch(440, 300)
-        pins.analogPitch(440, 150)
-        pins.analogPitch(880, 500)
-        pins.analogPitch(831, 325)
-        pins.analogPitch(784, 175)
-        pins.analogPitch(740, 125)
-        pins.analogPitch(698, 125)
-        pins.analogPitch(740, 250)
-        basic.pause(325)
-        pins.analogPitch(466, 250)
-        pins.analogPitch(622, 500)
-        pins.analogPitch(587, 325)
-        pins.analogPitch(554, 175)
-        pins.analogPitch(523, 125)
-        pins.analogPitch(466, 125)
-        pins.analogPitch(523, 250)
-        basic.pause(350)
-        pins.analogPitch(349, 250)
-        pins.analogPitch(415, 500)
-        pins.analogPitch(349, 350)
-        pins.analogPitch(440, 125)
-        pins.analogPitch(523, 500)
-        pins.analogPitch(440, 375)
-        pins.analogPitch(523, 125)
-        pins.analogPitch(659, 650)
-        basic.pause(500)
-        pins.analogPitch(880, 500)
-        pins.analogPitch(440, 300)
-        pins.analogPitch(440, 150)
-        pins.analogPitch(880, 500)
-        pins.analogPitch(831, 325)
-        pins.analogPitch(784, 175)
-        pins.analogPitch(740, 125)
-        pins.analogPitch(698, 125)
-        pins.analogPitch(740, 250)
-        basic.pause(325)
-        pins.analogPitch(466, 250)
-        pins.analogPitch(622, 500)
-        pins.analogPitch(587, 325)
-        pins.analogPitch(554, 175)
-        pins.analogPitch(523, 125)
-        pins.analogPitch(466, 125)
-        pins.analogPitch(523, 250)
-        basic.pause(350)
-        pins.analogPitch(349, 250)
-        pins.analogPitch(415, 500)
-        pins.analogPitch(349, 375)
-        pins.analogPitch(523, 125)
-        pins.analogPitch(440, 500)
-        pins.analogPitch(349, 375)
-        pins.analogPitch(523, 125)
-        pins.analogPitch(440, 650)
-        basic.pause(650)
+        if(buzzerOccupied != true){
+        control.inBackground(function () {
+            buzzerOccupied = true;
+            pins.analogPitch(440, 500)
+            pins.analogPitch(440, 500)
+            pins.analogPitch(440, 500)
+            pins.analogPitch(349, 350)
+            pins.analogPitch(523, 150)
+            pins.analogPitch(440, 500)
+            pins.analogPitch(349, 350)
+            pins.analogPitch(523, 150)
+            pins.analogPitch(440, 650)
+            basic.pause(500)
+            pins.analogPitch(659, 500)
+            pins.analogPitch(659, 500)
+            pins.analogPitch(659, 500)
+            pins.analogPitch(698, 350)
+            pins.analogPitch(523, 150)
+            pins.analogPitch(415, 500)
+            pins.analogPitch(349, 350)
+            pins.analogPitch(523, 150)
+            pins.analogPitch(440, 650)
+            basic.pause(500)
+            pins.analogPitch(880, 500)
+            pins.analogPitch(440, 300)
+            pins.analogPitch(440, 150)
+            pins.analogPitch(880, 500)
+            pins.analogPitch(831, 325)
+            pins.analogPitch(784, 175)
+            pins.analogPitch(740, 125)
+            pins.analogPitch(698, 125)
+            pins.analogPitch(740, 250)
+            basic.pause(325)
+            pins.analogPitch(466, 250)
+            pins.analogPitch(622, 500)
+            pins.analogPitch(587, 325)
+            pins.analogPitch(554, 175)
+            pins.analogPitch(523, 125)
+            pins.analogPitch(466, 125)
+            pins.analogPitch(523, 250)
+            basic.pause(350)
+            pins.analogPitch(349, 250)
+            pins.analogPitch(415, 500)
+            pins.analogPitch(349, 350)
+            pins.analogPitch(440, 125)
+            pins.analogPitch(523, 500)
+            pins.analogPitch(440, 375)
+            pins.analogPitch(523, 125)
+            pins.analogPitch(659, 650)
+            basic.pause(500)
+            pins.analogPitch(880, 500)
+            pins.analogPitch(440, 300)
+            pins.analogPitch(440, 150)
+            pins.analogPitch(880, 500)
+            pins.analogPitch(831, 325)
+            pins.analogPitch(784, 175)
+            pins.analogPitch(740, 125)
+            pins.analogPitch(698, 125)
+            pins.analogPitch(740, 250)
+            basic.pause(325)
+            pins.analogPitch(466, 250)
+            pins.analogPitch(622, 500)
+            pins.analogPitch(587, 325)
+            pins.analogPitch(554, 175)
+            pins.analogPitch(523, 125)
+            pins.analogPitch(466, 125)
+            pins.analogPitch(523, 250)
+            basic.pause(350)
+            pins.analogPitch(349, 250)
+            pins.analogPitch(415, 500)
+            pins.analogPitch(349, 375)
+            pins.analogPitch(523, 125)
+            pins.analogPitch(440, 500)
+            pins.analogPitch(349, 375)
+            pins.analogPitch(523, 125)
+            pins.analogPitch(440, 650)
+            basic.pause(650)
+            buzzerOccupied = false;
+        })
+        }
     }
 
 
