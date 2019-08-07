@@ -47,8 +47,8 @@ You have to use the pin select block to specify the pin that is connected to the
 //When there is a buzzer connected to the P8 pin
 twin.buzzerPinSel(OutPins.P8)
 ```
-### Playing a melody from the buzzer
-You can select any of the melodies previously added by us to play on the buzzer.
+### Playing a melody on the buzzer
+You can select any of the melodies previously added by us to play on the buzzer. Currently playing a melody on the buzzer blocks any other melodies from playing until that one finishes playing.
 ```blocks
 //Plays the starwars melody
 twin.buzzerMelody(0)
@@ -66,7 +66,7 @@ twin.buzzerCustomNote(340, 100)
 ```
 
 ## License
-
+MIT
 
 
 ## Supported targets
