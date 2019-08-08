@@ -1,7 +1,7 @@
 /**
  * Enumeration for output pins
  */
-enum OutPins {
+enum OUTPINS {
     //% block=P8
     P8,
     //% block=P14
@@ -13,7 +13,7 @@ enum OutPins {
 /**
  * Enumeration for input pins 
  */
-enum InPins {
+enum INPINS {
     //% block=P0
     P0,
     //% block=P1
@@ -24,65 +24,65 @@ enum InPins {
 /**
  * Enumeration for sensor types
  */
-enum SensorType {
-    //% block=Movement
-    movement,
-    //% block=Light
-    light,
-    //% block=Sound
-    sound
+enum SENSORTYPE {
+    //% block=movement
+    MOVEMENT,
+    //% block=light
+    LIGHT,
+    //% block=sound
+    SOUND
 }
 /**
 * Enumeration for buzer melodies 
 */
-enum BuzzerMelodies {
-    Starwars
+enum BUZZERMELODIES {
+    STARWARS
 }
 /**
 * Enumeration for buzzer notes 
 */
-enum BuzzerNotes {
-    LowC = 131,
-    LowCS = 139,
-    LowD = 147,
-    LowDS = 156,
-    LowE = 165,
-    LowF = 175,
-    LowFS = 185,
-    LowG = 196,
-    LowGS = 208,
-    LowA = 220,
-    LowAS = 234,
-    LowB = 247,
-    MiddleC = 262,
-    MiddleCS = 278,
-    MiddleD = 294,
-    MiddleDS = 311,
-    MiddleE = 330,
-    MiddleF = 349,
-    MiddleFS = 370,
-    MiddleG = 394,
-    MiddleGS = 415,
-    MiddleB = 494,
-    HighC = 523,
-    HighCS = 554,
-    HighD = 587,
-    HighDS = 632,
-    HighE = 659,
-    HighF = 699,
-    HighFS = 740,
-    HighG = 784,
-    HighGS = 831,
-    HighA = 880,
-    HighAS = 932,
-    HighB = 988,
+enum BUZZERNOTES {
+    LOWC = 131,
+    LOWCS = 139,
+    LOWD = 147,
+    LOWDS = 156,
+    LOWE = 165,
+    LOWF = 175,
+    LOWFS = 185,
+    LOWG = 196,
+    LOWGS = 208,
+    LOWA = 220,
+    LOWAS = 234,
+    LOWB = 247,
+    MIDDLEC = 262,
+    MIDDLECS = 278,
+    MIDDLED = 294,
+    MIDDLEDS = 311,
+    MIDDLEE = 330,
+    MIDDLEF = 349,
+    MIDDLEFS = 370,
+    MIDDLEG = 394,
+    MIDDLEGS = 415,
+    MIDDLEB = 494,
+    HIGHC = 523,
+    HIGHCS = 554,
+    HIGHD = 587,
+    HIGHDS = 632,
+    HIGHE = 659,
+    HIGHF = 699,
+    HIGHFS = 740,
+    HIGHG = 784,
+    HIGHGS = 831,
+    HIGHA = 880,
+    HIGHAS = 932,
+    HIGHB = 988,
 }
 /**
 * Enumeration for pin modes 
 */
-enum PinMode {
-    Analog,
-    Digital
+enum PINMODE {
+    ANALOG,
+    DIGITAL
 }
 
 /**
@@ -99,44 +99,44 @@ namespace twin {
     //% velocity.min=0 velocity.max=100
     //% weight=100
     //% subcategory=Movement
-    export function dcMotor(outPin: OutPins, velocity: number) {
+    export function dcMotor(outPin: OUTPINS, velocity: number) {
         if (velocity != 0) {
             velocity = 495 + 5.28 * velocity
         }
-        pinWrite(PinMode.Analog, outPin, velocity);
+        pinWrite(PINMODE.ANALOG, outPin, velocity);
     }
 
     /**
     * Select Servomotor Pin and speed when it is operating in b mode
     */
-    //% blockId="twin_servo_movement" block="Servomotor at %outPin rotation speed %speed"
+    //% blockId="twin_servo_movement" block="servomotor at %outPin rotation speed %speed"
     //% speed.min=0 speed.max=100
     //% weight=90
     //% subcategory=Movement
-    export function servoMotor(outPin: OutPins, speed: number) {
-        pinWrite(PinMode.Analog, outPin, speed)
+    export function servoMotor(outPin: OUTPINS, speed: number) {
+        pinWrite(PINMODE.ANALOG, outPin, speed)
     }
 
     //Detect
     /**
     * Read the sensor at given pin
     */
-    //% blockId="twin_sensor_detect" block="Value read by the %sensor sensor at %inPin"
+    //% blockId="twin_sensor_detect" block="value read by the %sensor sensor at %inPin"
     //% weight=100
     //% subcategory=Detect
-    export function readSensor(sensor: SensorType, inPin: InPins): number {
-        let readValue = pinRead(PinMode.Analog, inPin);
+    export function readSensor(sensor: SENSORTYPE, inPin: INPINS): number {
+        let readValue = pinRead(PINMODE.ANALOG, inPin);
         return readValue
     }
 
     /**
     * Read the button at given pin
     */
-    //% blockId="twin_button_detect" block="Button at %inPin is pressed"
+    //% blockId="twin_button_detect" block="button at %inPin is pressed"
     //% weight=95
     //% subcategory=Detect
-    export function buttonPress(inPin: InPins): boolean {
-        let readValue = pinRead(PinMode.Analog, inPin);
+    export function buttonPress(inPin: INPINS): boolean {
+        let readValue = pinRead(PINMODE.ANALOG, inPin);
         if (aToD(readValue)) return true;
         else return false;
     }
@@ -144,11 +144,11 @@ namespace twin {
     /**
     * Read the remote control at given pin
     */
-    //% blockId="twin_remote_detect" block="Remote control at %inPin detects signal"
+    //% blockId="twin_remote_detect" block="remote control at %inPin detects signal"
     //% weight=90
     //% subcategory=Detect
-    export function remoteControl(inPin: InPins): boolean {
-        let readValue = pinRead(PinMode.Analog, inPin);
+    export function remoteControl(inPin: INPINS): boolean {
+        let readValue = pinRead(PINMODE.ANALOG, inPin);
         if (aToD(readValue)) return true;
         else return false;
     }
@@ -156,39 +156,39 @@ namespace twin {
     /**
     * Read the potantiometer value at given pin
     */
-    //% blockId="twin_potantiometer_detect" block="Value read by the potantiometer at %inPin"
+    //% blockId="twin_potantiometer_detect" block="value read by the potantiometer at %inPin"
     //% weight=85
     //% subcategory=Detect
-    export function potantiometer(inPin: InPins): number {
-        return pinRead(PinMode.Analog, inPin);
+    export function potantiometer(inPin: INPINS): number {
+        return pinRead(PINMODE.ANALOG, inPin);
     }
 
     /**
     * Read the infrared proximity sensor value at given pin
     */
-    //% blockId="twin_proximity_detect" block="Value read by the proximity sensor at %inPin"
+    //% blockId="twin_proximity_detect" block="value read by the proximity sensor at %inPin"
     //% weight=80
     //% subcategory=Detect
-    export function proxSensor(inPin: InPins): number {
-        return pinRead(PinMode.Analog, inPin);
+    export function proxSensor(inPin: INPINS): number {
+        return pinRead(PINMODE.ANALOG, inPin);
     }
 
     //Light and Sound
     /**
      * Select the pin the buzzer is connected to
      */
-    //% blockId="twin_buzzersel_sound" block="Select %outpin as the buzzer connection"
+    //% blockId="twin_buzzersel_sound" block="select %outpin as the buzzer connection"
     //% weight=100
     //% subcategory=Sound
-    export function buzzerPinSel(outPin: OutPins) {
+    export function buzzerPinSel(outPin: OUTPINS) {
         switch (outPin) {
-            case OutPins.P8:
+            case OUTPINS.P8:
                 pins.analogSetPitchPin(AnalogPin.P8);
                 break;
-            case OutPins.P14:
+            case OUTPINS.P14:
                 pins.analogSetPitchPin(AnalogPin.P14);
                 break;
-            case OutPins.P16:
+            case OUTPINS.P16:
                 pins.analogSetPitchPin(AnalogPin.P16);
                 break;
         }
@@ -198,14 +198,14 @@ namespace twin {
      * Play the selected melody on the buzzer connected at the selected pin
      *  Next block will not wait this melody to complete!
      */
-    //% blockId="twin_melody_sound" block="Play %melody on the buzzer"
+    //% blockId="twin_melody_sound" block="play %melody on the buzzer"
     //% weight=97
     //% subcategory=Sound
-    export function buzzerMelody(melody: BuzzerMelodies) {
-        //TODO Starwars only for now
+    export function buzzerMelody(melody: BUZZERMELODIES) {
+        //TODO STARWARS only for now
         switch (melody) {
-            case BuzzerMelodies.Starwars:
-                starWars();
+            case BUZZERMELODIES.STARWARS:
+                STARWARS();
                 break;
         }
     }
@@ -213,17 +213,17 @@ namespace twin {
     /**
      * Play the selected note on the buzzer connected at the selected pin
      */
-    //% blockId="twin_note_sound" block="Play tone %note for %ms ms"
+    //% blockId="twin_note_sound" block="play tone %note for %ms ms"
     //% weight=95
     //% subcategory=Sound
-    export function buzzerNote(note: BuzzerNotes, ms: number) {
+    export function buzzerNote(note: BUZZERNOTES, ms: number) {
         pins.analogPitch(note, ms);
     }
 
     /**
      * Play the input frequency on the buzzer connected at the selected pin
      */
-    //% blockId="twin_customnote_sound" block="Play tone %note (Hz) for %ms ms"
+    //% blockId="twin_customnote_sound" block="play tone %note (Hz) for %ms ms"
     //% weight=90
     //% subcategory=Sound
     export function buzzerCustomNote(note: number, ms: number) {
@@ -231,51 +231,51 @@ namespace twin {
     }
 
 
-    function pinWrite(pinmode: PinMode, outPin: OutPins, value: number) {
-        if (pinmode == PinMode.Analog) {
+    function pinWrite(PinMode: PINMODE, outPin: OUTPINS, value: number) {
+        if (PinMode == PINMODE.ANALOG) {
             switch (outPin) {
-                case OutPins.P8:
+                case OUTPINS.P8:
                     pins.analogWritePin(AnalogPin.P8, value);
                     break;
-                case OutPins.P14:
+                case OUTPINS.P14:
                     pins.analogWritePin(AnalogPin.P14, value);
                     break;
-                case OutPins.P16:
+                case OUTPINS.P16:
                     pins.analogWritePin(AnalogPin.P16, value);
                     break;
             }
         } else {
             switch (outPin) {
-                case OutPins.P8:
+                case OUTPINS.P8:
                     pins.digitalWritePin(DigitalPin.P8, value);
                     break;
-                case OutPins.P14:
+                case OUTPINS.P14:
                     pins.digitalWritePin(DigitalPin.P14, value);
                     break;
-                case OutPins.P16:
+                case OUTPINS.P16:
                     pins.digitalWritePin(DigitalPin.P16, value);
                     break;
             }
         }
     }
-    function pinRead(pinmode: PinMode, inPin: InPins): number {
-        if (pinmode == PinMode.Analog) {
+    function pinRead(pinMode: PINMODE, inPin: INPINS): number {
+        if (pinMode == PINMODE.ANALOG) {
             switch (inPin) {
-                case InPins.P0:
+                case INPINS.P0:
                     return pins.analogReadPin(AnalogPin.P0);
-                case InPins.P1:
+                case INPINS.P1:
                     return pins.analogReadPin(AnalogPin.P1);
-                case InPins.P2:
+                case INPINS.P2:
                     return pins.analogReadPin(AnalogPin.P2);
                 default: return -1;
             }
         } else {
             switch (inPin) {
-                case InPins.P0:
+                case INPINS.P0:
                     return pins.digitalReadPin(DigitalPin.P0);
-                case InPins.P1:
+                case INPINS.P1:
                     return pins.digitalReadPin(DigitalPin.P1);
-                case InPins.P2:
+                case INPINS.P2:
                     return pins.digitalReadPin(DigitalPin.P2);
                 default: return -1;
             }
@@ -283,86 +283,86 @@ namespace twin {
     }
     function aToD(value: number): number { if (value >= 495) return 1; else return 0; }
     //Todo BuzzerOccupied is a temporary solution
-    function starWars() {
-        if(buzzerOccupied != true){
-        control.inBackground(function () {
-            buzzerOccupied = true;
-            pins.analogPitch(440, 500)
-            pins.analogPitch(440, 500)
-            pins.analogPitch(440, 500)
-            pins.analogPitch(349, 350)
-            pins.analogPitch(523, 150)
-            pins.analogPitch(440, 500)
-            pins.analogPitch(349, 350)
-            pins.analogPitch(523, 150)
-            pins.analogPitch(440, 650)
-            basic.pause(500)
-            pins.analogPitch(659, 500)
-            pins.analogPitch(659, 500)
-            pins.analogPitch(659, 500)
-            pins.analogPitch(698, 350)
-            pins.analogPitch(523, 150)
-            pins.analogPitch(415, 500)
-            pins.analogPitch(349, 350)
-            pins.analogPitch(523, 150)
-            pins.analogPitch(440, 650)
-            basic.pause(500)
-            pins.analogPitch(880, 500)
-            pins.analogPitch(440, 300)
-            pins.analogPitch(440, 150)
-            pins.analogPitch(880, 500)
-            pins.analogPitch(831, 325)
-            pins.analogPitch(784, 175)
-            pins.analogPitch(740, 125)
-            pins.analogPitch(698, 125)
-            pins.analogPitch(740, 250)
-            basic.pause(325)
-            pins.analogPitch(466, 250)
-            pins.analogPitch(622, 500)
-            pins.analogPitch(587, 325)
-            pins.analogPitch(554, 175)
-            pins.analogPitch(523, 125)
-            pins.analogPitch(466, 125)
-            pins.analogPitch(523, 250)
-            basic.pause(350)
-            pins.analogPitch(349, 250)
-            pins.analogPitch(415, 500)
-            pins.analogPitch(349, 350)
-            pins.analogPitch(440, 125)
-            pins.analogPitch(523, 500)
-            pins.analogPitch(440, 375)
-            pins.analogPitch(523, 125)
-            pins.analogPitch(659, 650)
-            basic.pause(500)
-            pins.analogPitch(880, 500)
-            pins.analogPitch(440, 300)
-            pins.analogPitch(440, 150)
-            pins.analogPitch(880, 500)
-            pins.analogPitch(831, 325)
-            pins.analogPitch(784, 175)
-            pins.analogPitch(740, 125)
-            pins.analogPitch(698, 125)
-            pins.analogPitch(740, 250)
-            basic.pause(325)
-            pins.analogPitch(466, 250)
-            pins.analogPitch(622, 500)
-            pins.analogPitch(587, 325)
-            pins.analogPitch(554, 175)
-            pins.analogPitch(523, 125)
-            pins.analogPitch(466, 125)
-            pins.analogPitch(523, 250)
-            basic.pause(350)
-            pins.analogPitch(349, 250)
-            pins.analogPitch(415, 500)
-            pins.analogPitch(349, 375)
-            pins.analogPitch(523, 125)
-            pins.analogPitch(440, 500)
-            pins.analogPitch(349, 375)
-            pins.analogPitch(523, 125)
-            pins.analogPitch(440, 650)
-            basic.pause(650)
-            buzzerOccupied = false;
-        })
+    function STARWARS() {
+        if (buzzerOccupied != true) {
+            control.inBackground(function () {
+                buzzerOccupied = true;
+                pins.analogPitch(440, 500)
+                pins.analogPitch(440, 500)
+                pins.analogPitch(440, 500)
+                pins.analogPitch(349, 350)
+                pins.analogPitch(523, 150)
+                pins.analogPitch(440, 500)
+                pins.analogPitch(349, 350)
+                pins.analogPitch(523, 150)
+                pins.analogPitch(440, 650)
+                basic.pause(500)
+                pins.analogPitch(659, 500)
+                pins.analogPitch(659, 500)
+                pins.analogPitch(659, 500)
+                pins.analogPitch(698, 350)
+                pins.analogPitch(523, 150)
+                pins.analogPitch(415, 500)
+                pins.analogPitch(349, 350)
+                pins.analogPitch(523, 150)
+                pins.analogPitch(440, 650)
+                basic.pause(500)
+                pins.analogPitch(880, 500)
+                pins.analogPitch(440, 300)
+                pins.analogPitch(440, 150)
+                pins.analogPitch(880, 500)
+                pins.analogPitch(831, 325)
+                pins.analogPitch(784, 175)
+                pins.analogPitch(740, 125)
+                pins.analogPitch(698, 125)
+                pins.analogPitch(740, 250)
+                basic.pause(325)
+                pins.analogPitch(466, 250)
+                pins.analogPitch(622, 500)
+                pins.analogPitch(587, 325)
+                pins.analogPitch(554, 175)
+                pins.analogPitch(523, 125)
+                pins.analogPitch(466, 125)
+                pins.analogPitch(523, 250)
+                basic.pause(350)
+                pins.analogPitch(349, 250)
+                pins.analogPitch(415, 500)
+                pins.analogPitch(349, 350)
+                pins.analogPitch(440, 125)
+                pins.analogPitch(523, 500)
+                pins.analogPitch(440, 375)
+                pins.analogPitch(523, 125)
+                pins.analogPitch(659, 650)
+                basic.pause(500)
+                pins.analogPitch(880, 500)
+                pins.analogPitch(440, 300)
+                pins.analogPitch(440, 150)
+                pins.analogPitch(880, 500)
+                pins.analogPitch(831, 325)
+                pins.analogPitch(784, 175)
+                pins.analogPitch(740, 125)
+                pins.analogPitch(698, 125)
+                pins.analogPitch(740, 250)
+                basic.pause(325)
+                pins.analogPitch(466, 250)
+                pins.analogPitch(622, 500)
+                pins.analogPitch(587, 325)
+                pins.analogPitch(554, 175)
+                pins.analogPitch(523, 125)
+                pins.analogPitch(466, 125)
+                pins.analogPitch(523, 250)
+                basic.pause(350)
+                pins.analogPitch(349, 250)
+                pins.analogPitch(415, 500)
+                pins.analogPitch(349, 375)
+                pins.analogPitch(523, 125)
+                pins.analogPitch(440, 500)
+                pins.analogPitch(349, 375)
+                pins.analogPitch(523, 125)
+                pins.analogPitch(440, 650)
+                basic.pause(650)
+                buzzerOccupied = false;
+            })
         }
     }
 
