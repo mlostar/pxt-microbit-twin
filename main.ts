@@ -130,7 +130,7 @@ namespace twin {
     }
 
     /**
-    * Read the button at given pin
+    * Get the button state(Pressed or not) at given pin
     */
     //% blockId="twin_button_detect" block="button at %inPin is pressed"
     //% weight=95
@@ -142,7 +142,7 @@ namespace twin {
     }
 
     /**
-    * Read the remote control at given pin
+    * Get the remote control state(Detecs signal or not) at given pin
     */
     //% blockId="twin_remote_detect" block="remote control at %inPin detects signal"
     //% weight=90
